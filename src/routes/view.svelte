@@ -1,5 +1,6 @@
 <svelte:head>
-    <title>Highlight | Wordsy</title>
+    <title>Highlight | Wordless</title>
+	<meta name="description" content="View someone's wordless score, spoiler free!" />
 </svelte:head>
 
 <div class="game">

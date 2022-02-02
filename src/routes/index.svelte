@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Today | Wordle</title>
+    <title>Today's challenge | Wordless</title>
 </svelte:head>
 <svelte:window on:keydown={handleKeydown}/>
 <div class="game">
