@@ -18,6 +18,7 @@
 <script>
     import Board from "../components/board.svelte";
     import { initBoard, getTodaysWord, formatRow } from "../lib/utils.js";
+    import wordlist from "../lib/wordlist.json";
     import { compress } from "../lib/compression.js";
     
     let tiles = initBoard(6, 5);
@@ -27,12 +28,16 @@
     let letter = 0;
     let playing = true;
     let dismissed_modal = false;
+    let can_write = true;
 
     
     function handleKeydown(e) {
         let keyCode = e.keyCode;
         
         if (!playing) {
+            return;
+        }
+        if (!can_write) {
             return;
         }
 
@@ -94,6 +99,26 @@
     }
 
     function submitRow() {
+
+        let line = tiles[row].map(tile => tile.letter).join("");
+
+        if (!wordlist.includes(line)) {
+            // Not a valid word
+            tiles[row] = tiles[row].map(tile => {
+                tile.state = "invalid";
+                return tile;
+            });
+            can_write = false;
+            setTimeout(() => {
+                tiles[row] = tiles[row].map(tile => {
+                    tile.state = "set";
+                    return tile;
+                });
+                can_write = true;
+            }, 250);
+            return;
+        }
+
         tiles[row] = formatRow(word, tiles[row]);
 
         if (tiles[row].filter(tile => tile.state === "correct").length === 5) {

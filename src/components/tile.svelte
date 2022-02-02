@@ -44,6 +44,9 @@
     .set {
         border: 4px solid #565758;
     }
+    .invalid {
+        border: 4px solid #FF0000;
+    }
     .letter {
         font-size: 4em;
         font-family: "Roboto", sans-serif;
