@@ -25,6 +25,11 @@
         border: 4px solid red;
         position: relative;
     }
+    .tile::after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
     .incorrect {
         background-color: #3a3a3c;
         border: 4px solid #3a3a3c;
