@@ -138,12 +138,24 @@
         }
     }
 
-    function shareResults() {
+    function shareResults(e) {
         let compressed = compress(tiles);
         let encoded = encodeURIComponent(compressed);
         let url = `${window.location.origin}/view?t=${encoded}`;
 
         navigator.clipboard.writeText(url);
+        
+        e.target.style.backgroundColor = "green";
+        const oldText = e.target.innerText;
+        const newText = "Copied link to clipboard!";
+        e.target.innerText = newText;
+        
+        setTimeout(() => {
+            // We don't want to change the text again if the user clicks multiple times for example
+            if (e.target.innerText === newText) {
+                e.target.innerText = oldText;
+            }
+        }, 5000);
     }
 </script>
 
