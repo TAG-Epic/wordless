@@ -31,28 +31,28 @@ function getTodaysWord() {
 }
 
 function formatRow(word, row) {
-    let new_row = [];
+    const wordLetters = Array.from(word);
+    const rowLetters = row.map((tile) => tile.letter);
+    const newRow = row.map((tile) => ({
+        state: "incorrect",
+        letter: tile.letter,
+    }));
     for (let i = 0; i < row.length; i++) {
         let tile = row[i];
         if (word[i] === tile.letter) {
-            new_row.push({
-                state: "correct",
-                letter: tile.letter,
-            });
-        } else if (word.indexOf(tile.letter) !== -1) {
-            new_row.push({
-                state: "partial",
-                letter: tile.letter,
-            })
-        } else {
-            new_row.push({
-                state: "incorrect",
-                letter: tile.letter,
-            })
+            newRow[i].state = "correct";
+            wordLetters[i] = null;
+            rowLetters[i] = null;
         }
     }
-    
-    return new_row;
+    for (let i = 0; i < row.length; i++) {
+        let tile = row[i];
+        if (rowLetters[i] !== null && wordLetters.indexOf(tile.letter) !== -1) {
+            newRow[i].state = "partial";
+            wordLetters[wordLetters.indexOf(tile.letter)] = null;
+        }
+    }    
+    return newRow;
 }
 
 export { initBoard, getTodaysWord, formatRow, getWordByDayId, daysPassed };
