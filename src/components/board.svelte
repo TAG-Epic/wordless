@@ -18,5 +18,7 @@
         flex-direction: row;
         gap: 5px;
         margin: 5px;
+        width: 90%;
+        max-width: max-content;
     }
 </style>

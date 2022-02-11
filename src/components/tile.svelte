@@ -18,12 +18,17 @@
 <style>
     .tile {
         width: 100px;
-        height: 100px;
         border: 1px solid black;
         display: flex;
         justify-content: center;
         align-items: center;
         border: 4px solid red;
+        position: relative;
+    }
+    .tile::after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
     }
     .incorrect {
         background-color: #3a3a3c;
@@ -48,7 +53,7 @@
         border: 4px solid #FF0000;
     }
     .letter {
-        font-size: 4em;
+        font-size: min(10vw, 4em);
         font-family: "Roboto", sans-serif;
         color: white;
         text-transform: uppercase;
